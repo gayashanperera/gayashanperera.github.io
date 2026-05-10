@@ -27,6 +27,125 @@
   gap: 14px;
 }
 
+.built-with {
+  margin-left: 18px;
+  padding: 0 10px;
+  height: 18px;
+  border-radius: 4px;
+  background: linear-gradient(
+    100deg,
+    rgba(221, 0, 49, 0.18) 0%,
+    rgba(192, 56, 153, 0.22) 50%,
+    rgba(221, 0, 49, 0.18) 100%
+  );
+  background-size: 220% 100%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  animation: bw-shimmer 6s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
+
+  .ng-mark {
+    width: 12px;
+    height: 12px;
+    flex-shrink: 0;
+    animation: ng-spin 4.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    transform-origin: 50% 55%;
+
+    polygon {
+      fill: #dd0031;
+    }
+
+    .ng-shade {
+      fill: #c3002f;
+    }
+  }
+
+  .bw-text {
+    font-size: 10.5px;
+    letter-spacing: 0.04em;
+    color: rgba(255, 255, 255, 0.92);
+    display: inline-flex;
+    gap: 4px;
+    align-items: baseline;
+    white-space: nowrap;
+  }
+
+  .ng-name {
+    color: #ff8eb1;
+    font-weight: 600;
+  }
+
+  .bw-by {
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  .ng-author {
+    color: #fff;
+    font-weight: 600;
+  }
+
+  .bw-pulse {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.18) 50%,
+      transparent 100%
+    );
+    transform: translateX(-100%);
+    animation: bw-sweep 4.5s ease-in-out infinite;
+    pointer-events: none;
+  }
+}
+
+@keyframes bw-shimmer {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes ng-spin {
+  0%,
+  60% {
+    transform: rotate(0deg);
+  }
+  70% {
+    transform: rotate(20deg);
+  }
+  85% {
+    transform: rotate(-10deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes bw-sweep {
+  0%,
+  60% {
+    transform: translateX(-100%);
+  }
+  85% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .built-with,
+  .built-with .ng-mark,
+  .built-with .bw-pulse {
+    animation: none;
+  }
+}
+
 @media (max-width: 900px) {
   :host {
     font-size: 10px;
@@ -44,6 +163,23 @@
   }
 
   .pos {
+    display: none;
+  }
+
+  .built-with {
+    margin-left: auto;
+    padding: 0 8px;
+    height: 16px;
+
+    .bw-text {
+      font-size: 9.5px;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .built-with .bw-by,
+  .built-with .ng-author {
     display: none;
   }
 }

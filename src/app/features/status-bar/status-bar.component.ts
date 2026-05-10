@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, VERSION, computed, inject, input } from '@angular/core';
 import { IconComponent } from '../../shared/icon/icon.component';
 import { IdeStateService } from '../../state/ide-state.service';
 
@@ -13,4 +13,5 @@ export class StatusBarComponent {
   private readonly state = inject(IdeStateService);
   readonly position = input(1);
   protected readonly lang = computed(() => this.state.activeFileEntry().lang);
+  protected readonly angularMajor = VERSION.major;
 }
