@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, effect, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, inject, signal } from '@angular/core';
 import { SKILLS } from '../../../data/profile.data';
 import type { CodeLine, SkillBar, SkillGroup } from '../../../data/profile.types';
 import { CodeLineComponent } from '../../../shared/code-line/code-line.component';
@@ -17,10 +17,9 @@ interface SkillSection {
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CodeLineComponent, SkillBarComponent],
   templateUrl: './skills-panel.component.html',
-  styleUrl: './skills-panel.component.scss',
 })
 export class SkillsPanelComponent {
-  protected readonly state = inject(IdeStateService);
+  private readonly state = inject(IdeStateService);
   protected readonly animate = signal(false);
 
   protected readonly intro: CodeLine = {
@@ -34,37 +33,15 @@ export class SkillsPanelComponent {
   };
 
   protected readonly sections: readonly SkillSection[] = [
-    {
-      group: 'frontend',
-      openLine: this.openLine(3, 'frontend'),
-      closeLine: this.closeLine(4, true),
-      bars: SKILLS.filter((s) => s.group === 'frontend'),
-    },
-    {
-      group: 'backend',
-      openLine: this.openLine(5, 'backend'),
-      closeLine: this.closeLine(6, true),
-      bars: SKILLS.filter((s) => s.group === 'backend'),
-    },
-    {
-      group: 'data',
-      openLine: this.openLine(7, 'data'),
-      closeLine: this.closeLine(8, true),
-      bars: SKILLS.filter((s) => s.group === 'data'),
-    },
-    {
-      group: 'tools',
-      openLine: this.openLine(9, 'tools'),
-      closeLine: this.closeLine(10, false),
-      bars: SKILLS.filter((s) => s.group === 'tools'),
-    },
+    this.section('frontend', 3, 4, true),
+    this.section('backend', 5, 6, true),
+    this.section('data', 7, 8, true),
+    this.section('tools', 9, 10, false),
   ];
-
-  private readonly isActive = computed(() => this.state.activeFile() === 'skills');
 
   constructor() {
     effect(() => {
-      if (!this.isActive()) {
+      if (this.state.activeFile() !== 'skills') {
         this.animate.set(false);
         return;
       }
@@ -73,18 +50,22 @@ export class SkillsPanelComponent {
     });
   }
 
-  private openLine(num: number, key: SkillGroup): CodeLine {
+  private section(group: SkillGroup, openNum: number, closeNum: number, withComma: boolean): SkillSection {
     return {
-      num,
-      tokens: [
-        { kind: 'text', text: '  ' },
-        { kind: 'prop', text: `"${key}"` },
-        { kind: 'text', text: ': [' },
-      ],
+      group,
+      openLine: {
+        num: openNum,
+        tokens: [
+          { kind: 'text', text: '  ' },
+          { kind: 'prop', text: `"${group}"` },
+          { kind: 'text', text: ': [' },
+        ],
+      },
+      closeLine: {
+        num: closeNum,
+        tokens: [{ kind: 'text', text: withComma ? '  ],' : '  ]' }],
+      },
+      bars: SKILLS.filter((s) => s.group === group),
     };
-  }
-
-  private closeLine(num: number, withComma: boolean): CodeLine {
-    return { num, tokens: [{ kind: 'text', text: withComma ? '  ],' : '  ]' }] };
   }
 }

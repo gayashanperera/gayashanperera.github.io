@@ -13,22 +13,6 @@ import { IdeStateService } from '../../../state/ide-state.service';
       <app-code-line [line]="line" (pillClicked)="onPill($event)" />
     }
   `,
-  styles: [
-    `
-      :host {
-        display: block;
-        padding: 14px 0 60px;
-        font-size: 13.5px;
-        line-height: 1.7;
-      }
-      @media (max-width: 900px) {
-        :host {
-          font-size: 12.5px;
-          line-height: 1.65;
-        }
-      }
-    `,
-  ],
 })
 export class ProfilePanelComponent {
   private readonly state = inject(IdeStateService);

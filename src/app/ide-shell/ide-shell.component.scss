@@ -70,6 +70,23 @@
   position: relative;
   min-height: 0;
   z-index: 1;
+  font-size: 13.5px;
+  line-height: 1.7;
+
+  // Code panels share the same padding inside the editor.
+  app-profile-panel,
+  app-experience-panel,
+  app-skills-panel {
+    display: block;
+    padding: 14px 0 60px;
+  }
+}
+
+@media (max-width: 900px) {
+  .editor {
+    font-size: 12.5px;
+    line-height: 1.65;
+  }
 }
 
 .scrim {

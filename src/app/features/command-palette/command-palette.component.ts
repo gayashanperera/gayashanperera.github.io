@@ -9,12 +9,12 @@ import {
   viewChild,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import type { PaletteCommand } from '../../data/profile.types';
+import type { PaletteCommand, PaletteSectionId } from '../../data/profile.types';
 import { IconComponent } from '../../shared/icon/icon.component';
 import { IdeStateService } from '../../state/ide-state.service';
 
 interface PaletteGroup {
-  readonly section: PaletteCommand['section'];
+  readonly section: PaletteSectionId;
   readonly items: readonly { command: PaletteCommand; index: number }[];
 }
 
@@ -36,7 +36,7 @@ export class CommandPaletteComponent {
 
   protected readonly groups = computed<readonly PaletteGroup[]>(() => {
     const items = this.state.filteredCommands();
-    const groups = new Map<PaletteCommand['section'], { command: PaletteCommand; index: number }[]>();
+    const groups = new Map<PaletteSectionId, { command: PaletteCommand; index: number }[]>();
     items.forEach((c, i) => {
       const arr = groups.get(c.section) ?? [];
       arr.push({ command: c, index: i });

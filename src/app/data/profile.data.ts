@@ -13,6 +13,29 @@ import type {
   SourceControlEntry,
 } from './profile.types';
 
+// =============================================================================
+// Helpers
+// =============================================================================
+
+/** Build a frozen `id`-keyed lookup from a list of records. */
+function keyBy<T extends { readonly id: K }, K extends string>(
+  items: readonly T[],
+): Readonly<Record<K, T>> {
+  return Object.freeze(
+    items.reduce(
+      (acc, item) => {
+        acc[item.id] = item;
+        return acc;
+      },
+      {} as Record<K, T>,
+    ),
+  );
+}
+
+// =============================================================================
+// Personal info
+// =============================================================================
+
 export const CONTACT = {
   email: 'pereragayashan@gmail.com',
   phone: '+94715770954',
@@ -23,6 +46,10 @@ export const CONTACT = {
   githubUrl: 'https://github.com/gayashanperera',
   location: 'Pitipana North, Homagama, Sri Lanka',
 } as const;
+
+// =============================================================================
+// Files (sidebar + tabs + outline)
+// =============================================================================
 
 export const FILES: readonly FileEntry[] = [
   {
@@ -93,25 +120,101 @@ export const FILES: readonly FileEntry[] = [
   },
 ];
 
-export const FILES_BY_ID: Readonly<Record<FileId, FileEntry>> = Object.freeze(
-  FILES.reduce(
-    (acc, f) => {
-      acc[f.id] = f;
-      return acc;
-    },
-    {} as Record<FileId, FileEntry>,
-  ),
-);
+export const FILES_BY_ID: Readonly<Record<FileId, FileEntry>> = keyBy(FILES);
+
+// =============================================================================
+// Projects (single source of truth — pill tone, palette colors, mapping to job)
+// =============================================================================
 
 export const PROJECTS: readonly Project[] = [
-  { id: 'skillground', name: 'SkillGround', year: '2022→', tone: 'str', iconColor: 'var(--str)', jobId: 'skillground' },
-  { id: 'medics', name: 'Medics', year: '2018', tone: 'fn', iconColor: 'var(--fn)', jobId: 'synapsys' },
-  { id: 'smartah', name: 'SmartAH', year: '2021', tone: 'num', iconColor: 'var(--num)', jobId: 'edhirya' },
-  { id: 'beautech', name: 'Beautech', year: '2021', tone: 'kw', iconColor: 'var(--kw)', jobId: 'edhirya' },
-  { id: 'dentalpro', name: 'DentalPro', year: '2017', tone: 'default', iconColor: 'var(--type)', jobId: 'edhirya' },
-  { id: 'cherri', name: 'CHERRI', year: '2017', tone: 'str', iconColor: 'var(--tag)', jobId: 'sense' },
-  { id: 'galle', name: 'Galle Motors', year: '2017', tone: 'fn', iconColor: 'var(--prop)', jobId: 'sense' },
-  { id: 'classroom', name: 'Classroom Salon', year: '2016', tone: 'num', iconColor: 'var(--str)', jobId: 'openarc' },
+  {
+    id: 'skillground',
+    name: 'SkillGround',
+    year: '2022→',
+    tone: 'str',
+    iconColor: 'var(--str)',
+    jobId: 'skillground',
+    paletteSub: '2022 → Now · Frontend lead',
+    paletteIconBg: '#1f2e1a',
+    paletteIconColor: '#b8e88a',
+  },
+  {
+    id: 'medics',
+    name: 'Medics',
+    year: '2018',
+    tone: 'fn',
+    iconColor: 'var(--fn)',
+    jobId: 'synapsys',
+    paletteSub: 'Healthcare · Angular 13',
+    paletteIconBg: '#1a2440',
+    paletteIconColor: '#82aaff',
+  },
+  {
+    id: 'smartah',
+    name: 'SmartAH',
+    year: '2021',
+    tone: 'num',
+    iconColor: 'var(--num)',
+    jobId: 'edhirya',
+    paletteSub: 'ERP/HRM · multi-tenant',
+    paletteIconBg: '#3a2418',
+    paletteIconColor: '#f78c6c',
+  },
+  {
+    id: 'beautech',
+    name: 'Beautech',
+    year: '2021',
+    tone: 'kw',
+    iconColor: 'var(--kw)',
+    jobId: 'edhirya',
+    paletteSub: 'Salon platform · Angular 7',
+    paletteIconBg: '#2a1f3d',
+    paletteIconColor: '#c792ea',
+  },
+  {
+    id: 'dentalpro',
+    name: 'DentalPro',
+    year: '2017',
+    tone: 'default',
+    iconColor: 'var(--type)',
+    jobId: 'edhirya',
+    paletteSub: 'Clinic management · Laravel',
+    paletteIconBg: '#3a2418',
+    paletteIconColor: '#ffd479',
+  },
+  {
+    id: 'cherri',
+    name: 'CHERRI',
+    year: '2017',
+    tone: 'str',
+    iconColor: 'var(--tag)',
+    jobId: 'sense',
+    paletteSub: 'E-commerce · Facebook API',
+    paletteIconBg: '#3a1818',
+    paletteIconColor: '#f07178',
+  },
+  {
+    id: 'galle',
+    name: 'Galle Motors',
+    year: '2017',
+    tone: 'fn',
+    iconColor: 'var(--prop)',
+    jobId: 'sense',
+    paletteSub: 'Stock & payments',
+    paletteIconBg: '#1a2e2a',
+    paletteIconColor: '#7fdbca',
+  },
+  {
+    id: 'classroom',
+    name: 'Classroom Salon',
+    year: '2016',
+    tone: 'num',
+    iconColor: 'var(--str)',
+    jobId: 'openarc',
+    paletteSub: 'E-learning · .NET',
+    paletteIconBg: '#1f2e1a',
+    paletteIconColor: '#b8e88a',
+  },
 ];
 
 export const PROJECT_TO_JOB: Readonly<Record<ProjectId, JobId>> = Object.freeze(
@@ -124,11 +227,19 @@ export const PROJECT_TO_JOB: Readonly<Record<ProjectId, JobId>> = Object.freeze(
   ),
 );
 
+// =============================================================================
+// Source control entries (sidebar)
+// =============================================================================
+
 export const SOURCE_CONTROL: readonly SourceControlEntry[] = [
   { file: 'profile.ts', status: 'M', diff: '+12 -3' },
   { file: 'skills.json', status: '+', diff: 'new' },
   { file: 'contact.md', status: '+', diff: 'new' },
 ];
+
+// =============================================================================
+// Jobs / experience timeline
+// =============================================================================
 
 export const JOBS: readonly JobMeta[] = [
   {
@@ -242,15 +353,11 @@ export const JOBS: readonly JobMeta[] = [
   },
 ];
 
-export const JOBS_BY_ID: Readonly<Record<JobId, JobMeta>> = Object.freeze(
-  JOBS.reduce(
-    (acc, j) => {
-      acc[j.id] = j;
-      return acc;
-    },
-    {} as Record<JobId, JobMeta>,
-  ),
-);
+export const JOBS_BY_ID: Readonly<Record<JobId, JobMeta>> = keyBy(JOBS);
+
+// =============================================================================
+// Skills bars (skills.json panel)
+// =============================================================================
 
 export const SKILLS: readonly SkillBar[] = [
   { name: 'Angular 7–18+', pct: 98, group: 'frontend' },
@@ -271,6 +378,10 @@ export const SKILLS: readonly SkillBar[] = [
   { name: 'VS Code & WebStorm', pct: 96, group: 'tools' },
 ];
 
+// =============================================================================
+// Contact rows (contact.md panel)
+// =============================================================================
+
 export const CONTACT_ROWS: readonly ContactRow[] = [
   { label: 'Email', value: CONTACT.email, href: `mailto:${CONTACT.email}` },
   { label: 'Phone', value: CONTACT.phoneDisplay, href: `tel:${CONTACT.phone}` },
@@ -289,6 +400,10 @@ export const CONTACT_ROWS: readonly ContactRow[] = [
   { label: 'Location', value: CONTACT.location, href: '#' },
 ];
 
+// =============================================================================
+// Problems pane
+// =============================================================================
+
 export const PROBLEMS: readonly ProblemEntry[] = [
   { severity: 'i', text: 'No blocking issues. Codebase is hire-ready.', file: 'profile.ts · status' },
   {
@@ -303,7 +418,11 @@ export const PROBLEMS: readonly ProblemEntry[] = [
   },
 ];
 
-const profileLines: CodeLine[] = [
+// =============================================================================
+// profile.ts panel — typed code lines
+// =============================================================================
+
+export const PROFILE_PANEL_LINES: readonly CodeLine[] = [
   { num: 1, tokens: [{ kind: 'comment', text: '// ~/profile.ts — Gayashan Perera' }] },
   {
     num: 2,
@@ -500,28 +619,36 @@ const profileLines: CodeLine[] = [
   },
 ];
 
-export const PROFILE_PANEL_LINES: readonly CodeLine[] = profileLines;
+// =============================================================================
+// experience.ts panel — head + dynamic job rows + tail
+// =============================================================================
 
-const jobLine = (num: number, job: JobMeta): CodeLine => ({
-  num,
-  jobId: job.id,
-  toggle: true,
-  tokens: [
-    { kind: 'text', text: '{ ' },
-    { kind: 'prop', text: 'company' },
-    { kind: 'text', text: ': ' },
-    { kind: 'str', text: `"${job.company}"` },
-    { kind: 'text', text: ', ' },
-    { kind: 'prop', text: 'years' },
-    { kind: 'text', text: ': ' },
-    { kind: 'str', text: `"${job.years}"` },
-    { kind: 'text', text: ', ' },
-    { kind: 'prop', text: 'role' },
-    { kind: 'text', text: ': ' },
-    { kind: 'str', text: `"${job.role}"` },
-    { kind: 'text', text: ' },' },
-  ],
-});
+function jobLine(num: number, job: JobMeta): CodeLine {
+  return {
+    num,
+    jobId: job.id,
+    toggle: true,
+    tokens: [
+      { kind: 'text', text: '{ ' },
+      { kind: 'prop', text: 'company' },
+      { kind: 'text', text: ': ' },
+      { kind: 'str', text: `"${job.company}"` },
+      { kind: 'text', text: ', ' },
+      { kind: 'prop', text: 'years' },
+      { kind: 'text', text: ': ' },
+      { kind: 'str', text: `"${job.years}"` },
+      { kind: 'text', text: ', ' },
+      { kind: 'prop', text: 'role' },
+      { kind: 'text', text: ': ' },
+      { kind: 'str', text: `"${job.role}"` },
+      { kind: 'text', text: ' },' },
+    ],
+  };
+}
+
+const EXPERIENCE_HEAD_LINES = 3;
+const FIRST_JOB_LINE = EXPERIENCE_HEAD_LINES + 1;
+const POST_JOBS_LINE = FIRST_JOB_LINE + JOBS.length;
 
 export const EXPERIENCE_PANEL_HEAD: readonly CodeLine[] = [
   {
@@ -540,14 +667,16 @@ export const EXPERIENCE_PANEL_HEAD: readonly CodeLine[] = [
   },
 ];
 
-export const EXPERIENCE_PANEL_JOBS: readonly CodeLine[] = JOBS.map((j, i) => jobLine(i + 4, j));
+export const EXPERIENCE_PANEL_JOBS: readonly CodeLine[] = JOBS.map((j, i) =>
+  jobLine(FIRST_JOB_LINE + i, j),
+);
 
 export const EXPERIENCE_PANEL_TAIL: readonly CodeLine[] = [
-  { num: 9, tokens: [{ kind: 'text', text: '];' }] },
-  { num: 10, tokens: [] },
-  { num: 11, tokens: [{ kind: 'comment', text: '// EDUCATION' }] },
+  { num: POST_JOBS_LINE, tokens: [{ kind: 'text', text: '];' }] },
+  { num: POST_JOBS_LINE + 1, tokens: [] },
+  { num: POST_JOBS_LINE + 2, tokens: [{ kind: 'comment', text: '// EDUCATION' }] },
   {
-    num: 12,
+    num: POST_JOBS_LINE + 3,
     tokens: [
       { kind: 'kw', text: 'export const' },
       { kind: 'text', text: ' ' },
@@ -556,7 +685,7 @@ export const EXPERIENCE_PANEL_TAIL: readonly CodeLine[] = [
     ],
   },
   {
-    num: 13,
+    num: POST_JOBS_LINE + 4,
     tokens: [
       { kind: 'text', text: '  { ' },
       { kind: 'prop', text: 'degree' },
@@ -576,7 +705,7 @@ export const EXPERIENCE_PANEL_TAIL: readonly CodeLine[] = [
     ],
   },
   {
-    num: 14,
+    num: POST_JOBS_LINE + 5,
     tokens: [
       { kind: 'text', text: '  { ' },
       { kind: 'prop', text: 'degree' },
@@ -594,7 +723,7 @@ export const EXPERIENCE_PANEL_TAIL: readonly CodeLine[] = [
     ],
   },
   {
-    num: 15,
+    num: POST_JOBS_LINE + 6,
     tokens: [
       { kind: 'text', text: '];' },
       { kind: 'cursor' },
@@ -602,7 +731,11 @@ export const EXPERIENCE_PANEL_TAIL: readonly CodeLine[] = [
   },
 ];
 
-export const PALETTE_COMMANDS: readonly PaletteCommand[] = [
+// =============================================================================
+// Command palette (⌘K)
+// =============================================================================
+
+const FILE_PALETTE_COMMANDS: readonly PaletteCommand[] = [
   {
     section: 'Files',
     id: 'open-profile',
@@ -643,6 +776,9 @@ export const PALETTE_COMMANDS: readonly PaletteCommand[] = [
     sub: 'Open contact info',
     action: { kind: 'open-file', file: 'contact' },
   },
+];
+
+const ACTION_PALETTE_COMMANDS: readonly PaletteCommand[] = [
   {
     section: 'Actions',
     id: 'send-email',
@@ -683,16 +819,20 @@ export const PALETTE_COMMANDS: readonly PaletteCommand[] = [
     sub: CONTACT.githubHandle,
     action: { kind: 'href', url: CONTACT.githubUrl },
   },
-  ...PROJECTS.map<PaletteCommand>((p) => ({
-    section: 'Projects',
-    id: `open-project-${p.id}`,
-    icon: '▸',
-    iconBg: paletteIconBg(p.id),
-    iconColor: paletteIconColor(p.id),
-    label: p.name,
-    sub: paletteProjectSub(p.id),
-    action: { kind: 'open-project', project: p.id },
-  })),
+];
+
+const PROJECT_PALETTE_COMMANDS: readonly PaletteCommand[] = PROJECTS.map((p) => ({
+  section: 'Projects',
+  id: `open-project-${p.id}`,
+  icon: '▸',
+  iconBg: p.paletteIconBg,
+  iconColor: p.paletteIconColor,
+  label: p.name,
+  sub: p.paletteSub,
+  action: { kind: 'open-project', project: p.id },
+}));
+
+const PANEL_PALETTE_COMMANDS: readonly PaletteCommand[] = [
   {
     section: 'Panels',
     id: 'show-terminal',
@@ -715,62 +855,9 @@ export const PALETTE_COMMANDS: readonly PaletteCommand[] = [
   },
 ];
 
-function paletteIconBg(id: ProjectId): string {
-  switch (id) {
-    case 'skillground':
-    case 'classroom':
-      return '#1f2e1a';
-    case 'medics':
-      return '#1a2440';
-    case 'smartah':
-    case 'dentalpro':
-      return '#3a2418';
-    case 'beautech':
-      return '#2a1f3d';
-    case 'cherri':
-      return '#3a1818';
-    case 'galle':
-      return '#1a2e2a';
-  }
-}
-
-function paletteIconColor(id: ProjectId): string {
-  switch (id) {
-    case 'skillground':
-    case 'classroom':
-      return '#b8e88a';
-    case 'medics':
-      return '#82aaff';
-    case 'smartah':
-      return '#f78c6c';
-    case 'beautech':
-      return '#c792ea';
-    case 'dentalpro':
-      return '#ffd479';
-    case 'cherri':
-      return '#f07178';
-    case 'galle':
-      return '#7fdbca';
-  }
-}
-
-function paletteProjectSub(id: ProjectId): string {
-  switch (id) {
-    case 'skillground':
-      return '2022 → Now · Frontend lead';
-    case 'medics':
-      return 'Healthcare · Angular 13';
-    case 'smartah':
-      return 'ERP/HRM · multi-tenant';
-    case 'beautech':
-      return 'Salon platform · Angular 7';
-    case 'dentalpro':
-      return 'Clinic management · Laravel';
-    case 'cherri':
-      return 'E-commerce · Facebook API';
-    case 'galle':
-      return 'Stock & payments';
-    case 'classroom':
-      return 'E-learning · .NET';
-  }
-}
+export const PALETTE_COMMANDS: readonly PaletteCommand[] = [
+  ...FILE_PALETTE_COMMANDS,
+  ...ACTION_PALETTE_COMMANDS,
+  ...PROJECT_PALETTE_COMMANDS,
+  ...PANEL_PALETTE_COMMANDS,
+];

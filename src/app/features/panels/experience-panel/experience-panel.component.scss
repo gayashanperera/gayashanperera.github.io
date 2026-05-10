@@ -1,16 +1,4 @@
-:host {
-  display: block;
-  padding: 14px 0 60px;
-  font-size: 13.5px;
-  line-height: 1.7;
-}
-
 @media (max-width: 900px) {
-  :host {
-    font-size: 12.5px;
-    line-height: 1.65;
-  }
-
   // On mobile, render expandable job rows as stacked cards.
   /* stylelint-disable-next-line selector-pseudo-element-no-unknown */
   :host ::ng-deep app-code-line.code-line[data-job] {

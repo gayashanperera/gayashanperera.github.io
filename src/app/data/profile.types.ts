@@ -84,6 +84,12 @@ export interface Project {
   readonly tone: PillTone;
   readonly iconColor: string;
   readonly jobId: JobId;
+  /** Subtitle shown in the command palette. */
+  readonly paletteSub: string;
+  /** Background color for the palette icon swatch. */
+  readonly paletteIconBg: string;
+  /** Foreground color for the palette icon swatch. */
+  readonly paletteIconColor: string;
 }
 
 export type SkillGroup = 'frontend' | 'backend' | 'data' | 'tools';
@@ -100,11 +106,10 @@ export interface SourceControlEntry {
   readonly diff: string;
 }
 
-export interface PaletteSection {
-  readonly section: 'Files' | 'Actions' | 'Projects' | 'Panels';
-}
+export type PaletteSectionId = 'Files' | 'Actions' | 'Projects' | 'Panels';
 
-export interface PaletteCommand extends PaletteSection {
+export interface PaletteCommand {
+  readonly section: PaletteSectionId;
   readonly id: string;
   readonly icon: string;
   readonly iconBg: string;
