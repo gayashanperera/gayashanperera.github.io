@@ -8,6 +8,7 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
+import { AngularBugComponent } from '../features/angular-bug/angular-bug.component';
 import { BreadcrumbComponent } from '../features/breadcrumb/breadcrumb.component';
 import { CommandPaletteComponent } from '../features/command-palette/command-palette.component';
 import { EditorTabsComponent } from '../features/editor-tabs/editor-tabs.component';
@@ -40,6 +41,7 @@ import { IdeStateService } from '../state/ide-state.service';
     CommandPaletteComponent,
     MobileNavComponent,
     LinkedinPillComponent,
+    AngularBugComponent,
   ],
   templateUrl: './ide-shell.component.html',
   styleUrl: './ide-shell.component.scss',

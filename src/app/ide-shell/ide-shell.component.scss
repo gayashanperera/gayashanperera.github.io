@@ -22,6 +22,46 @@
   min-width: 0;
   background: var(--bg);
   overflow: hidden;
+  position: relative;
+}
+
+// Angular logo watermark — centered behind editor content, gentle opacity pulse
+.editor-wrap::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: clamp(220px, 36vw, 440px);
+  aspect-ratio: 1;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 250 250'><polygon points='125,30 218,63 204,182 125,225 46,182 32,63' fill='%23dd0031'/><polygon points='125,30 125,225 204,182 218,63' fill='%23c3002f'/><path d='M125 52 l-65 144 h24 l13-32h57l13 32h24z m0 46 l21 50h-43z' fill='%23ffffff'/></svg>")
+    center / contain no-repeat;
+  pointer-events: none;
+  z-index: 0;
+  transform: translate(-50%, -50%);
+  animation: editor-logo-breathe 7s ease-in-out infinite;
+}
+
+@keyframes editor-logo-breathe {
+  0%,
+  100% {
+    opacity: 0.07;
+  }
+  50% {
+    opacity: 0.12;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .editor-wrap::after {
+    animation: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .editor-wrap::after {
+    width: clamp(160px, 60vw, 280px);
+    opacity: 0.06;
+  }
 }
 
 .editor {
@@ -29,6 +69,7 @@
   overflow-y: auto;
   position: relative;
   min-height: 0;
+  z-index: 1;
 }
 
 .scrim {
