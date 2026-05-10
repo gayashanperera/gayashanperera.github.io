@@ -1,0 +1,14 @@
+@let c = cert();
+<div class="head">
+  <span class="badge" [style.background]="c.badgeBg" [style.color]="c.badgeColor">
+    {{ c.badge }}
+  </span>
+  <div class="head-text">
+    <div class="name">{{ c.name }}</div>
+    <div class="issued">{{ c.issuer }} · Issued {{ c.issued }}</div>
+  </div>
+</div>
+<div class="cred">
+  <span class="cred-label">Credential ID</span>
+  <span class="cred-id">{{ c.credentialId }}</span>
+</div>

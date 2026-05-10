@@ -1,0 +1,13 @@
+@for (line of head; track $index) {
+  <app-code-line [line]="line" (pillClicked)="onPill($event)" />
+}
+
+<div class="cert-grid">
+  @for (c of certs; track c.id) {
+    <app-cert-card [cert]="c" />
+  }
+</div>
+
+@for (line of tail; track $index) {
+  <app-code-line [line]="line" (pillClicked)="onPill($event)" />
+}

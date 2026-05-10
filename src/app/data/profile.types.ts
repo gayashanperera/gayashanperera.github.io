@@ -131,6 +131,20 @@ export interface ProblemEntry {
   readonly file: string;
 }
 
+export interface Certification {
+  readonly id: string;
+  readonly name: string;
+  readonly issuer: string;
+  readonly issued: string;
+  readonly credentialId: string;
+  /** Single-letter or short badge text shown in the card's icon swatch. */
+  readonly badge: string;
+  /** CSS color for the badge background. */
+  readonly badgeBg: string;
+  /** CSS color for the badge foreground / accent. */
+  readonly badgeColor: string;
+}
+
 export interface ContactRow {
   readonly label: string;
   readonly value: string;

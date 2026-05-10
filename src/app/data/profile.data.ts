@@ -1,4 +1,5 @@
 import type {
+  Certification,
   CodeLine,
   ContactRow,
   FileEntry,
@@ -65,7 +66,8 @@ export const FILES: readonly FileEntry[] = [
       { kind: 'k', name: 'import', line: 'L4' },
       { kind: 't', name: 'Engineer', line: 'L4' },
       { kind: 'v', name: 'gayashan', line: 'L6' },
-      { kind: 'f', name: 'at_a_glance', line: 'L22' },
+      { kind: 'v', name: 'certifications', line: 'L17' },
+      { kind: 'f', name: 'at_a_glance', line: 'L24' },
     ],
   },
   {
@@ -426,7 +428,7 @@ export const PROFILE_PANEL_LINES: readonly CodeLine[] = [
   { num: 1, tokens: [{ kind: 'comment', text: '// ~/profile.ts — Gayashan Perera' }] },
   {
     num: 2,
-    tokens: [{ kind: 'comment', text: '// 8+ years frontend, full-stack curiosity, healthcare → ERP.' }],
+    tokens: [{ kind: 'comment', text: '// 8+ years frontend, Angular mastered, full-stack curiosity, healthcare → ERP.' }],
   },
   { num: 3, tokens: [] },
   {
@@ -537,8 +539,13 @@ export const PROFILE_PANEL_LINES: readonly CodeLine[] = [
   },
   { num: 15, tokens: [{ kind: 'text', text: '};' }] },
   { num: 16, tokens: [] },
+  { num: 17, tokens: [{ kind: 'comment', text: '// Licenses & certifications — see card grid below.' }] },
+];
+
+export const PROFILE_PANEL_LINES_AFTER_CERTS: readonly CodeLine[] = [
+  { num: 18, tokens: [] },
   {
-    num: 17,
+    num: 19,
     tokens: [
       {
         kind: 'hero',
@@ -550,12 +557,12 @@ export const PROFILE_PANEL_LINES: readonly CodeLine[] = [
       },
     ],
   },
-  { num: 18, tokens: [] },
-  { num: 19, tokens: [{ kind: 'comment', text: '// Open files in the explorer ← or hit ⌘K to search.' }] },
-  { num: 20, tokens: [{ kind: 'comment', text: '// Hover any project pill below to see its case study.' }] },
-  { num: 21, tokens: [] },
+  { num: 20, tokens: [] },
+  { num: 21, tokens: [{ kind: 'comment', text: '// Open files in the explorer ← or hit ⌘K to search.' }] },
+  { num: 22, tokens: [{ kind: 'comment', text: '// Hover any project pill below to see its case study.' }] },
+  { num: 23, tokens: [] },
   {
-    num: 22,
+    num: 24,
     tokens: [
       { kind: 'kw', text: 'export const' },
       { kind: 'text', text: ' ' },
@@ -564,7 +571,7 @@ export const PROFILE_PANEL_LINES: readonly CodeLine[] = [
     ],
   },
   {
-    num: 23,
+    num: 25,
     tokens: [
       { kind: 'text', text: '  ' },
       { kind: 'prop', text: 'products' },
@@ -577,7 +584,7 @@ export const PROFILE_PANEL_LINES: readonly CodeLine[] = [
     ],
   },
   {
-    num: 24,
+    num: 26,
     tokens: [
       { kind: 'text', text: '  ' },
       { kind: 'prop', text: 'industries' },
@@ -593,7 +600,7 @@ export const PROFILE_PANEL_LINES: readonly CodeLine[] = [
     ],
   },
   {
-    num: 25,
+    num: 27,
     tokens: [
       { kind: 'text', text: '  ' },
       { kind: 'prop', text: 'strengths' },
@@ -611,11 +618,58 @@ export const PROFILE_PANEL_LINES: readonly CodeLine[] = [
     ],
   },
   {
-    num: 26,
+    num: 28,
     tokens: [
       { kind: 'text', text: '};' },
       { kind: 'cursor' },
     ],
+  },
+];
+
+// =============================================================================
+// Certifications (rendered as a card grid below the gayashan const)
+// =============================================================================
+
+export const CERTIFICATIONS: readonly Certification[] = [
+  {
+    id: 'mastering-angular',
+    name: 'Mastering Angular Development',
+    issuer: 'Edureka',
+    issued: 'May 2026',
+    credentialId: '853CFQXORB8U',
+    badge: 'E',
+    badgeBg: '#3a2418',
+    badgeColor: '#f78c6c',
+  },
+  {
+    id: 'advanced-angular-dev',
+    name: 'Advanced Angular Development',
+    issuer: 'Coursera',
+    issued: 'May 2026',
+    credentialId: 'fb7699472356c3df9d617c2b982ff437',
+    badge: 'C',
+    badgeBg: '#1a2440',
+    badgeColor: '#82aaff',
+  },
+  {
+    id: 'advanced-angular-topics',
+    name: 'Advanced Angular Topics',
+    issuer: 'Coursera',
+    issued: 'May 2026',
+    credentialId: 'de484347bc3c9710ad04d7d5afb744da',
+    badge: 'C',
+    badgeBg: '#1a2440',
+    badgeColor: '#82aaff',
+  },
+  {
+    id: 'angular-17',
+    name: 'Angular 17',
+    issuer: 'LearnQuest',
+    issued: 'May 2026',
+    credentialId: 'BZOWHWMLQT3L',
+    badge: 'L',
+    badgeBg: '#2a1f3d',
+    badgeColor: '#c792ea',
   },
 ];
 
