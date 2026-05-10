@@ -1,0 +1,16 @@
+<div class="tabs" #tabsHost role="tablist" aria-label="Open files">
+  @for (f of files; track f.id) {
+    <button
+      type="button"
+      role="tab"
+      class="tab"
+      [class.active]="state.activeFile() === f.id"
+      [attr.aria-selected]="state.activeFile() === f.id"
+      (click)="state.openFile(f.id)"
+    >
+      <span class="dot" [style.background]="f.dotColor" aria-hidden="true"></span>
+      <span class="label">{{ f.label }}</span>
+      <span class="x" aria-hidden="true">×</span>
+    </button>
+  }
+</div>

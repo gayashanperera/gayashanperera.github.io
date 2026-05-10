@@ -1,0 +1,36 @@
+<div class="terminal-head">
+  <span>zsh — try: help, whoami, skills, github, hire</span>
+  <span class="live">live</span>
+</div>
+<div class="terminal-body app-scroll-pane" #body (click)="focusInput()" tabindex="0">
+  @for (line of terminal.lines(); track line.id) {
+    @if (line.kind === 'cmd') {
+      <div class="term-line cmd">
+        <span class="path">{{ terminal.promptPath() }}</span>
+        @for (chunk of line.chunks; track $index) {
+          <span [class]="chunk.cls ?? null">{{ chunk.text }}</span>
+        }
+      </div>
+    } @else {
+      <div class="term-line">
+        @for (chunk of line.chunks; track $index) {
+          <span [class]="chunk.cls ?? null">{{ chunk.text }}</span>
+        }
+      </div>
+    }
+  }
+  <form class="term-input-row" (submit)="onSubmit($event)">
+    <span class="path">{{ terminal.promptPath() }}</span>
+    <input
+      #input
+      class="term-input"
+      autocomplete="off"
+      spellcheck="false"
+      aria-label="Terminal input"
+      [ngModel]="draft()"
+      (ngModelChange)="draft.set($event)"
+      (keydown)="onKeyDown($event)"
+      name="terminal-input"
+    />
+  </form>
+</div>

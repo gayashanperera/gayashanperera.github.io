@@ -1,0 +1,64 @@
+<span class="num">{{ num() }}</span>
+<span class="src" [class.toggle-row]="isToggle()" (click)="onRowClick()">
+  @if (isToggle()) {
+    <span class="chev">▸</span>
+  }
+  @for (t of tokens(); track $index) {
+    @switch (t.kind) {
+      @case ('text') {
+        <span>{{ t.text }}</span>
+      }
+      @case ('kw') {
+        <span class="kw">{{ t.text }}</span>
+      }
+      @case ('str') {
+        @let u = asUrl(t.text);
+        @if (u) {
+          <span class="str">{{ u.open }}<a class="str-link" [href]="u.href" target="_blank" rel="noopener noreferrer" (click)="$event.stopPropagation()">{{ u.href }}</a>{{ u.close }}</span>
+        } @else {
+          <span class="str">{{ t.text }}</span>
+        }
+      }
+      @case ('fn') {
+        <span class="fn-c">{{ t.text }}</span>
+      }
+      @case ('num') {
+        <span class="num-c">{{ t.text }}</span>
+      }
+      @case ('type') {
+        <span class="ty">{{ t.text }}</span>
+      }
+      @case ('prop') {
+        <span class="pr">{{ t.text }}</span>
+      }
+      @case ('comment') {
+        <span class="cm">{{ t.text }}</span>
+      }
+      @case ('tag') {
+        <span class="tg">{{ t.text }}</span>
+      }
+      @case ('cursor') {
+        <span class="cursor"></span>
+      }
+      @case ('pill') {
+        @let p = asPill(t);
+        @if (p) {
+          <app-pill
+            [text]="p.text"
+            [tone]="p.tone"
+            (clicked)="onPillClick($event, p.projectId)"
+          />
+        }
+      }
+      @case ('hero') {
+        @let h = asHero(t);
+        @if (h) {
+          <span class="hero">
+            <span class="hero-line">{{ h.leadingText }}<span class="acc">{{ h.accents[0] }}</span>{{ h.trailingText }}<span class="acc">{{ h.accents[1] }}</span>.<span class="cursor"></span></span>
+            <span class="hero-sub">{{ h.sub }}</span>
+          </span>
+        }
+      }
+    }
+  }
+</span>

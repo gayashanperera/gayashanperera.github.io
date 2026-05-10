@@ -1,0 +1,18 @@
+<div class="outline-wrap app-scroll-pane">
+  <h5>{{ entry().outlineTitle }}</h5>
+  @for (s of entry().symbols; track s.name) {
+    <div class="item">
+      <span class="glyph" [class]="'glyph-' + s.kind">{{ glyphChar(s.kind) }}</span>
+      {{ s.name }}
+      <span class="ln-no">{{ s.line }}</span>
+    </div>
+  }
+</div>
+<div class="stat-grid">
+  <div class="stat"><span class="l">Years</span><span class="v"><span class="acc">8</span>+</span></div>
+  <div class="stat"><span class="l">Companies</span><span class="v">5</span></div>
+  <div class="stat"><span class="l">Products shipped</span><span class="v">9</span></div>
+  <div class="stat"><span class="l">Industries</span><span class="v">4</span></div>
+  <div class="stat"><span class="l">Local time</span><span class="v">{{ state.clock() }}</span></div>
+  <div class="stat"><span class="l">Status</span><span class="v"><span class="acc">available</span></span></div>
+</div>

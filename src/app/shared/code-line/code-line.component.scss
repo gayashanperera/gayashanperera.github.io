@@ -1,0 +1,129 @@
+:host {
+  display: grid;
+  grid-template-columns: 50px 1fr;
+  column-gap: 18px;
+  padding: 0 16px 0 0;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.025);
+  }
+}
+
+.num {
+  color: #3a3f4d;
+  text-align: right;
+  user-select: none;
+  font-size: 12px;
+  padding-right: 8px;
+}
+
+.src {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.toggle-row {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+
+  .chev {
+    display: inline-block;
+    color: var(--muted);
+    transition: transform 0.2s;
+    width: 10px;
+  }
+}
+
+:host(.code-line--open) .toggle-row .chev {
+  transform: rotate(90deg);
+}
+
+.str-link {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: rgba(184, 232, 138, 0.35);
+  text-underline-offset: 2px;
+  transition: color 0.15s, text-decoration-color 0.15s;
+
+  &:hover {
+    color: var(--fn);
+    text-decoration-color: var(--fn);
+  }
+}
+
+.cursor {
+  display: inline-block;
+  width: 7px;
+  height: 1em;
+  background: var(--fn);
+  vertical-align: text-bottom;
+  animation: blink 1.05s steps(1) infinite;
+  margin-left: 1px;
+  border-radius: 1px;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.hero {
+  display: block;
+}
+
+.hero-line {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 42px;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  font-weight: 600;
+  padding: 18px 0 6px;
+  color: var(--text);
+
+  .acc {
+    color: var(--prop);
+  }
+}
+
+.hero-sub {
+  display: block;
+  font-family: var(--font-sans);
+  color: var(--muted);
+  font-size: 15px;
+  padding: 0 0 14px;
+  line-height: 1.5;
+  max-width: 60ch;
+}
+
+@media (max-width: 900px) {
+  :host {
+    grid-template-columns: 32px 1fr;
+    column-gap: 10px;
+    padding: 0 12px 0 0;
+  }
+
+  .num {
+    font-size: 11px;
+    padding-right: 4px;
+  }
+
+  .hero-line {
+    font-size: 30px;
+    padding: 14px 0 4px;
+  }
+
+  .hero-sub {
+    font-size: 13.5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-line {
+    font-size: 24px;
+  }
+}

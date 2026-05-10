@@ -1,0 +1,11 @@
+<div class="problems app-scroll-pane">
+  @for (p of problems; track $index) {
+    <div class="problem">
+      <span class="sev" [class]="'sev-' + p.severity">{{ p.severity }}</span>
+      <div>
+        <div class="text">{{ p.text }}</div>
+        <div class="file">{{ p.file }}</div>
+      </div>
+    </div>
+  }
+</div>

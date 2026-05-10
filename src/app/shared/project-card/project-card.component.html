@@ -1,0 +1,18 @@
+@let j = job();
+<h4>{{ j.fullRole }}</h4>
+<div class="meta">
+  @for (chip of j.metaChips; track $index) {
+    <span>{{ chip }}</span>
+  }
+</div>
+<p>{{ j.summary }}</p>
+<ul>
+  @for (b of j.bullets; track $index) {
+    <li>{{ b }}</li>
+  }
+</ul>
+<div class="stack">
+  @for (s of j.stack; track $index) {
+    <app-pill [text]="s.text" [tone]="s.tone" />
+  }
+</div>

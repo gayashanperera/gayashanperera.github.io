@@ -1,0 +1,98 @@
+:host {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  flex-direction: column;
+}
+
+.outline-wrap {
+  padding: 8px 0;
+  overflow-y: auto;
+  flex: 1;
+
+  h5 {
+    font-size: 10.5px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 10px 14px 6px;
+    font-weight: 600;
+  }
+
+  .item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 14px 5px 22px;
+    font-size: 12px;
+    cursor: pointer;
+    color: #bcc1cc;
+    transition:
+      background 0.15s,
+      color 0.15s;
+
+    &:hover {
+      background: var(--panel-2);
+      color: var(--text);
+    }
+
+    .glyph {
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+      display: grid;
+      place-items: center;
+      font-size: 9px;
+      font-weight: 700;
+    }
+
+    .glyph-k {
+      background: #2a1f3d;
+      color: var(--kw);
+    }
+    .glyph-f {
+      background: #1a2440;
+      color: var(--fn);
+    }
+    .glyph-v {
+      background: #1f2e1a;
+      color: var(--str);
+    }
+    .glyph-t {
+      background: #3a2418;
+      color: var(--num);
+    }
+
+    .ln-no {
+      margin-left: auto;
+      font-size: 10px;
+      color: var(--comment);
+    }
+  }
+}
+
+.stat-grid {
+  padding: 14px 16px;
+  border-top: 1px solid var(--line);
+}
+
+.stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  font-size: 12px;
+
+  .l {
+    color: var(--muted);
+  }
+
+  .v {
+    color: var(--text);
+    font-weight: 600;
+
+    .acc {
+      color: var(--prop);
+    }
+  }
+}

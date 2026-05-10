@@ -1,0 +1,128 @@
+.md {
+  font-family: var(--font-sans);
+  padding: 24px 40px;
+  max-width: 780px;
+
+  h1 {
+    font-size: 48px;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    margin-bottom: 8px;
+
+    .acc {
+      color: var(--prop);
+    }
+  }
+
+  .sub {
+    color: var(--muted);
+    font-size: 15px;
+    margin-bottom: 32px;
+  }
+
+  h2 {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    font-weight: 500;
+    margin-top: 28px;
+    margin-bottom: 14px;
+    font-family: var(--font-mono);
+  }
+
+  blockquote {
+    color: #cdd1d9;
+    font-size: 18px;
+    line-height: 1.5;
+    margin: 24px 0;
+    padding: 18px 22px;
+    background: var(--panel);
+    border-left: 3px solid var(--prop);
+    border-radius: 0 8px 8px 0;
+  }
+
+  .avail {
+    color: #cdd1d9;
+    font-size: 14.5px;
+    line-height: 1.6;
+  }
+
+  .contact-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 18px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    margin-bottom: 8px;
+    transition: all 0.25s;
+    color: var(--text);
+
+    &:hover {
+      border-color: var(--fn);
+      background: var(--panel-2);
+      transform: translateX(4px);
+
+      .arr {
+        color: var(--fn);
+        transform: translate(3px, -2px) rotate(-45deg);
+      }
+    }
+
+    .l {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 4px;
+    }
+
+    .v {
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .arr {
+      color: var(--muted);
+      transition:
+        transform 0.2s,
+        color 0.2s;
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .md {
+    padding: 18px 18px 60px;
+
+    h1 {
+      font-size: 32px;
+    }
+
+    .sub {
+      font-size: 13px;
+    }
+
+    blockquote {
+      font-size: 15px;
+      padding: 14px 16px;
+    }
+
+    .contact-row {
+      padding: 13px 14px;
+
+      .v {
+        font-size: 14.5px;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .md h1 {
+    font-size: 26px;
+  }
+}

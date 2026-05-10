@@ -1,0 +1,18 @@
+<nav aria-label="Mobile navigation">
+  <button type="button" class="m-btn" (click)="state.toggleDrawer()" aria-label="Toggle file drawer">
+    <span class="glyph">☰</span>Files
+  </button>
+  @for (btn of fileBtns; track btn.id) {
+    <button
+      type="button"
+      class="m-btn"
+      [class.active]="state.activeFile() === btn.id"
+      (click)="state.openFile(btn.id)"
+    >
+      <span class="glyph">{{ btn.glyph }}</span>{{ btn.label }}
+    </button>
+  }
+  <button type="button" class="m-btn" (click)="openSheetTerminal()" aria-label="Toggle terminal">
+    <span class="glyph">▣</span>terminal
+  </button>
+</nav>

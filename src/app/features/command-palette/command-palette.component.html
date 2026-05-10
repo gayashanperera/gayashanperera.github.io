@@ -1,0 +1,50 @@
+@if (state.paletteOpen()) {
+  <div class="pal-overlay" (click)="onScrimClick($event)">
+    <div class="pal" role="dialog" aria-modal="true" aria-label="Command palette">
+      <div class="pal-input-wrap">
+        <app-icon name="search" />
+        <input
+          #input
+          [ngModel]="state.paletteQuery()"
+          (ngModelChange)="onQueryChange($event)"
+          placeholder="Search files, commands, or projects…"
+          name="palette-query"
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <span class="kbd">esc</span>
+      </div>
+      <div class="pal-list app-scroll-pane" #list>
+        @if (groups().length === 0) {
+          <div class="pal-section">No matches</div>
+        }
+        @for (g of groups(); track g.section) {
+          <div class="pal-section">{{ g.section }}</div>
+          @for (entry of g.items; track entry.command.id) {
+            <button
+              type="button"
+              class="pal-item"
+              [class.sel]="entry.index === state.paletteSelIndex()"
+              (click)="run(entry.command)"
+            >
+              <span
+                class="ico"
+                [style.background]="entry.command.iconBg"
+                [style.color]="entry.command.iconColor"
+              >{{ entry.command.icon }}</span>
+              <span class="label">
+                {{ entry.command.label }}
+                <span class="sub">{{ entry.command.sub }}</span>
+              </span>
+            </button>
+          }
+        }
+      </div>
+      <div class="pal-foot">
+        <span><span class="k">↑↓</span> navigate</span>
+        <span><span class="k">↵</span> open</span>
+        <span><span class="k">esc</span> close</span>
+      </div>
+    </div>
+  </div>
+}

@@ -1,0 +1,52 @@
+<div class="grp">
+  <div class="grp-title">
+    <app-icon name="folder" />
+    Explorer
+  </div>
+  <ul>
+    @for (f of files; track f.id) {
+      <li
+        [class.active]="state.activeFile() === f.id"
+        (click)="state.openFile(f.id)"
+      >
+        <span class="ico" [style.color]="state.activeFile() === f.id ? 'var(--fn)' : f.iconColor">{{ f.iconGlyph }}</span>
+        {{ f.label }}
+        @if (f.id === 'profile') {
+          <span class="ts">●</span>
+        }
+      </li>
+    }
+  </ul>
+</div>
+
+<div class="grp">
+  <div class="grp-title">
+    <app-icon name="globe" />
+    Projects
+  </div>
+  <ul>
+    @for (p of projects; track p.id) {
+      <li (click)="state.openProject(p.id)">
+        <span class="ico" [style.color]="p.iconColor">▸</span>
+        {{ p.name }}
+        <span class="ts">{{ p.year }}</span>
+      </li>
+    }
+  </ul>
+</div>
+
+<div class="grp">
+  <div class="grp-title">
+    <app-icon name="menu" />
+    Source Control
+  </div>
+  <ul>
+    @for (s of sourceControl; track s.file) {
+      <li>
+        <span class="ico" [style.color]="s.status === 'M' ? 'var(--num)' : 'var(--str)'">{{ s.status }}</span>
+        {{ s.file }}
+        <span class="ts">{{ s.diff }}</span>
+      </li>
+    }
+  </ul>
+</div>

@@ -1,0 +1,12 @@
+.kw { color: var(--kw); }
+.str { color: var(--str); }
+.fn-c { color: var(--fn); }
+.num-c { color: var(--num); }
+.ty { color: var(--type); }
+.tg { color: var(--tag); }
+.pr { color: var(--prop); }
+.cm {
+  color: var(--comment);
+  font-style: italic;
+}
+.sans { font-family: var(--font-sans); }

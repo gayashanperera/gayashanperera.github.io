@@ -1,0 +1,36 @@
+<div class="ide">
+  <app-title-bar />
+
+  <div class="main">
+    <aside class="side app-scroll-pane" [class.open]="state.drawerOpen()">
+      <app-file-explorer />
+    </aside>
+
+    <div class="editor-wrap">
+      <app-editor-tabs />
+      <app-breadcrumb />
+      <div class="editor app-scroll-pane" #editor (scroll)="onEditorScroll()">
+        @switch (state.activeFile()) {
+          @case ('profile') { <app-profile-panel /> }
+          @case ('experience') { <app-experience-panel /> }
+          @case ('skills') { <app-skills-panel /> }
+          @case ('contact') { <app-contact-panel /> }
+        }
+      </div>
+    </div>
+
+    <aside class="right" [class.open]="state.sheetOpen()">
+      <app-right-panel />
+    </aside>
+  </div>
+
+  <app-status-bar [position]="editorPosition()" />
+</div>
+
+@if (state.drawerOpen() || state.sheetOpen()) {
+  <div class="scrim" (click)="state.closeMobileOverlays()" aria-hidden="true"></div>
+}
+
+<app-mobile-nav />
+<app-command-palette />
+<app-linkedin-pill />

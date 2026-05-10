@@ -1,0 +1,27 @@
+:host {
+  padding: 6px 16px;
+  border-bottom: 1px solid var(--line);
+  font-size: 11.5px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg);
+  flex-shrink: 0;
+
+  app-icon {
+    font-size: 10px;
+    color: var(--comment);
+  }
+}
+
+.cur {
+  color: var(--text);
+}
+
+@media (max-width: 900px) {
+  :host {
+    padding: 5px 12px;
+    font-size: 10.5px;
+  }
+}

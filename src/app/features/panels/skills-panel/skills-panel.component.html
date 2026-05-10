@@ -1,0 +1,12 @@
+<app-code-line [line]="intro" />
+<app-code-line [line]="openBrace" />
+
+@for (section of sections; track section.group) {
+  <app-code-line [line]="section.openLine" />
+  @for (bar of section.bars; track bar.name) {
+    <app-skill-bar [name]="bar.name" [pct]="bar.pct" [animate]="animate()" />
+  }
+  <app-code-line [line]="section.closeLine" />
+}
+
+<app-code-line [line]="closeBrace" />

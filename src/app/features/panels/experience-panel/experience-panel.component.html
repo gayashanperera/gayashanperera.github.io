@@ -1,0 +1,16 @@
+@for (line of head; track $index) {
+  <app-code-line [line]="line" />
+}
+
+@for (job of jobs; track job.id) {
+  <app-code-line
+    [line]="jobLineFor(job.id)"
+    [open]="state.isJobExpanded(job.id)"
+    (toggle)="state.toggleJob(job.id)"
+  />
+  <app-project-card [job]="jobMeta(job.id)" [open]="state.isJobExpanded(job.id)" />
+}
+
+@for (line of tail; track $index) {
+  <app-code-line [line]="line" />
+}

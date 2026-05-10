@@ -1,0 +1,29 @@
+<div class="right-tabs" role="tablist" aria-label="Editor side panel">
+  @for (t of tabs; track t.id) {
+    <button
+      type="button"
+      role="tab"
+      class="right-tab"
+      [class.active]="state.rightPaneTab() === t.id"
+      [attr.aria-selected]="state.rightPaneTab() === t.id"
+      (click)="state.setRightPane(t.id)"
+    >
+      {{ t.label }}
+      @if (t.badge) {
+        <span class="badge" [class.ok]="t.badge.tone === 'ok'">{{ t.badge.text }}</span>
+      }
+    </button>
+  }
+</div>
+
+@switch (state.rightPaneTab()) {
+  @case ('outline') {
+    <app-outline />
+  }
+  @case ('problems') {
+    <app-problems />
+  }
+  @case ('terminal') {
+    <app-terminal />
+  }
+}

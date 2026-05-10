@@ -1,0 +1,49 @@
+:host {
+  background: var(--status);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 14px;
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+  height: 24px;
+}
+
+.seg {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  app-icon {
+    font-size: 10px;
+  }
+}
+
+.right-segs {
+  margin-left: auto;
+  display: flex;
+  gap: 14px;
+}
+
+@media (max-width: 900px) {
+  :host {
+    font-size: 10px;
+    gap: 8px;
+    padding: 0 8px;
+  }
+
+  .right-segs {
+    gap: 8px;
+  }
+
+  .seg:nth-child(2),
+  .seg:nth-child(3) {
+    display: none;
+  }
+
+  .pos {
+    display: none;
+  }
+}

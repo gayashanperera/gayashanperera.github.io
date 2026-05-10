@@ -1,0 +1,34 @@
+<div class="md">
+  <h1>Let's build something <span class="acc">good.</span></h1>
+  <p class="sub">
+    Open to senior frontend roles · remote, hybrid, or Colombo-based · TZ Asia/Colombo (UTC+5:30)
+  </p>
+
+  <blockquote>
+    "Eight years building considered, fast, accessible interfaces — for healthcare, learning,
+    commerce, and the kind of internal tools quietly running businesses."
+  </blockquote>
+
+  <h2>// channels</h2>
+  @for (row of rows; track row.label) {
+    <a
+      class="contact-row"
+      [href]="row.href"
+      [attr.target]="row.external ? '_blank' : null"
+      [attr.rel]="row.external ? 'noopener noreferrer' : null"
+    >
+      <div>
+        <div class="l">{{ row.label }}</div>
+        <div class="v">{{ row.value }}</div>
+      </div>
+      <div class="arr">→</div>
+    </a>
+  }
+
+  <h2>// availability</h2>
+  <p class="avail">
+    Currently leading frontend at SkillGround. Open to senior frontend roles starting Q2 2026.
+    Bring me a thorny Angular codebase, a component library to crystallise, or a
+    healthcare/ERP/LMS product that needs craft — and we'll make it.
+  </p>
+</div>
