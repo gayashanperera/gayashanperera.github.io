@@ -12,7 +12,13 @@
       <span class="glyph">{{ btn.glyph }}</span>{{ btn.label }}
     </button>
   }
-  <button type="button" class="m-btn" (click)="openSheetTerminal()" aria-label="Toggle terminal">
+  <button
+    type="button"
+    class="m-btn"
+    [class.active]="state.sheetOpen()"
+    (click)="openSheetTerminal()"
+    aria-label="Toggle terminal"
+  >
     <span class="glyph">▣</span>terminal
   </button>
 </nav>
